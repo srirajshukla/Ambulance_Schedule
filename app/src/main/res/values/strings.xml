@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Ambulance Schedule</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_req">Enter name</string>
+    <string name="phone_req">Enter phone number</string>
+    <string name="start_req">Enter start time</string>
+    <string name="end_req">Enter end time</string>
+    <string name="day_req">Enter day</string>
+    <string name="save_action">Save the Schedule</string>
 </resources>
