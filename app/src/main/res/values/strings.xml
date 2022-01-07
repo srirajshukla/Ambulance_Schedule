@@ -11,5 +11,8 @@
     <string name="schedule">Schedule : </string>
     <string name="call">Call</string>
     <string name="delete">Delete</string>
-    <string name="edit_item">Edit this item</string>
+    <string name="edit_item">Edit this schedule</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="add_new_schedule">Add New Schedule</string>
 </resources>
