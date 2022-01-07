@@ -8,4 +8,8 @@
     <string name="end_req">Enter end time</string>
     <string name="day_req">Enter day</string>
     <string name="save_action">Save the Schedule</string>
+    <string name="schedule">Schedule : </string>
+    <string name="call">Call</string>
+    <string name="delete">Delete</string>
+    <string name="edit_item">Edit this item</string>
 </resources>

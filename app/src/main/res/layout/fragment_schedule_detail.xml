@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ScheduleDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin"
+        tools:context=".ScheduleDetailFragment">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/Widget.Schedule.TextView"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Name of Person" />
+
+        <TextView
+            android:id="@+id/phone"
+            style="@style/Widget.Schedule.TextView"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="+91 9090901000" />
+
+        <TextView
+            android:id="@+id/schedule_label"
+            style="@style/Widget.Schedule.TextView"
+            android:layout_width="wrap_content"
+            android:text="@string/schedule"
+            app:layout_constraintBaseline_toBaselineOf="@+id/schedule_time"
+            app:layout_constraintEnd_toStartOf="@+id/schedule_time"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/schedule_time"
+            style="@style/Widget.Schedule.TextView"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/margin_between_elements"
+            android:layout_marginTop="@dimen/margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/schedule_label"
+            app:layout_constraintTop_toBottomOf="@+id/phone"
+            tools:text="Friday, 8:00 PM to 12:00 AM" />
+
+        <Button
+            android:id="@+id/call_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:text="@string/call"
+            app:layout_constraintBottom_toTopOf="@+id/delete_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/schedule_time" />
+
+        <Button
+            android:id="@+id/delete_item"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:text="@string/delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/call_button" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/edit_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_between_elements"
+            android:layout_marginBottom="@dimen/margin_between_elements"
+            android:contentDescription="@string/edit_item"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@android:color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</FrameLayout>
