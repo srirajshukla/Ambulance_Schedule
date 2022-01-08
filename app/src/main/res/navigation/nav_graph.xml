@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/scheduleListFragment"
         android:name="com.gyan.ambulanceschedule.ScheduleListFragment"
-        android:label="schedule_list_fragment"
+        android:label="Ambulances Available"
         tools:layout="@layout/schedule_list_fragment" >
         <action
             android:id="@+id/action_scheduleListFragment_to_scheduleDetailFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/scheduleDetailFragment"
         android:name="com.gyan.ambulanceschedule.ScheduleDetailFragment"
-        android:label="fragment_schedule_detail"
+        android:label="Schedule Detail"
         tools:layout="@layout/fragment_schedule_detail" >
         <argument
             android:name="schedule_id"
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/addScheduleFragment"
         android:name="com.gyan.ambulanceschedule.AddScheduleFragment"
-        android:label="AddScheduleFragment" >
+        android:label="{title}" >
         <argument
             android:name="title"
             app:argType="string"/>

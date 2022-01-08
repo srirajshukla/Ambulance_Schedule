@@ -58,13 +58,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin"
             android:text="@string/call"
-            app:layout_constraintBottom_toTopOf="@+id/delete_item"
+            app:layout_constraintBottom_toTopOf="@+id/delete_schedule"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/schedule_time" />
 
         <Button
-            android:id="@+id/delete_item"
+            android:id="@+id/delete_schedule"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@id/call_button" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/edit_item"
+            android:id="@+id/edit_schedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_between_elements"

@@ -1,6 +1,10 @@
 package com.gyan.ambulanceschedule
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -64,7 +68,7 @@ class ScheduleDetailFragment : Fragment() {
             .setCancelable(false)
             .setNegativeButton(getString(R.string.no)) { _, _ -> }
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                deleteItem()
+                deleteSchedule()
             }
             .show()
     }
@@ -72,7 +76,8 @@ class ScheduleDetailFragment : Fragment() {
     /**
      * Deletes the current item and navigates to the list fragment.
      */
-    private fun deleteItem() {
+    private fun deleteSchedule() {
+        viewModel.deleteSchedule(schedule)
         findNavController().navigateUp()
     }
 
@@ -89,7 +94,41 @@ class ScheduleDetailFragment : Fragment() {
             name.text = schedule.name
             phone.text = schedule.phone
             scheduleTime.text = schedule.getFormattedSchedule()
+            callButton.setOnClickListener {
+                callAmbulance()
+            }
+            deleteSchedule.setOnClickListener {
+                showConfirmationDialog()
+            }
+            editSchedule.setOnClickListener {
+                editSchedule()
+            }
         }
+    }
+
+    /**
+     * Calls the phone number in the schedule
+     */
+    private fun callAmbulance() {
+        val uri = "tel:${schedule.phone}"
+        val intent = Intent().apply {
+            action = Intent.ACTION_DIAL
+            data = Uri.parse(uri)
+        }
+
+        try {
+            startActivity(intent)
+        } catch (e : ActivityNotFoundException){
+            Log.e("ScheduleDetailFragment", e.toString())
+        }
+    }
+
+    private fun editSchedule() {
+        val action = ScheduleDetailFragmentDirections.actionScheduleDetailFragmentToAddScheduleFragment(
+            "Edit this Schedule",
+            scheduleId = schedule.id
+        )
+        this.findNavController().navigate(action)
     }
 
 }

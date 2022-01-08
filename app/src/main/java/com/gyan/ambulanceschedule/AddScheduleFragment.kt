@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -50,9 +51,19 @@ class AddScheduleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.saveAction.setOnClickListener {
-            addNewSchedule()
+
+        val id = navigationArgs.scheduleId
+        if (id>0){
+            viewModel.retrieveSchedule(id).observe(this.viewLifecycleOwner) {selectedSchedule ->
+                schedule = selectedSchedule
+                bind(schedule)
+            }
+        } else {
+            binding.saveAction.setOnClickListener {
+                addNewSchedule()
+            }
         }
+
     }
 
 
@@ -85,6 +96,33 @@ class AddScheduleFragment : Fragment() {
                 binding.startTime.text.toString(),
                 binding.endTime.text.toString(),
                 binding.day.text.toString(),
+            )
+
+            val action = AddScheduleFragmentDirections.actionAddScheduleFragmentToScheduleListFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun bind(schedule: Schedule){
+        binding.apply {
+            name.setText(schedule.name, TextView.BufferType.SPANNABLE)
+            phone.setText(schedule.phone, TextView.BufferType.SPANNABLE)
+            startTime.setText(schedule.startTime, TextView.BufferType.SPANNABLE)
+            endTime.setText(schedule.endTime, TextView.BufferType.SPANNABLE)
+            day.setText(schedule.day, TextView.BufferType.SPANNABLE)
+            saveAction.setOnClickListener { updateSchedule() }
+        }
+    }
+
+    private fun updateSchedule() {
+        if (isEntryValid()){
+            viewModel.updateSchedule(
+                this.navigationArgs.scheduleId,
+                this.binding.name.text.toString(),
+                this.binding.phone.text.toString(),
+                this.binding.startTime.text.toString(),
+                this.binding.endTime.text.toString(),
+                this.binding.day.text.toString(),
             )
 
             val action = AddScheduleFragmentDirections.actionAddScheduleFragmentToScheduleListFragment()

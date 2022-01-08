@@ -45,6 +45,31 @@ class ScheduleViewModel(private val scheduleDao: ScheduleDao) : ViewModel() {
     fun retrieveSchedule(id: Int) : LiveData<Schedule> {
         return scheduleDao.getSchedule(id).asLiveData()
     }
+
+    private fun updateSchedule(schedule: Schedule){
+        viewModelScope.launch {
+            scheduleDao.update(schedule)
+        }
+    }
+
+    fun deleteSchedule(schedule: Schedule){
+        viewModelScope.launch {
+            scheduleDao.delete(schedule)
+        }
+    }
+
+    private fun getUpdatedScheduleEntry(
+        id: Int, name: String, phone: String, startTime: String, endTime: String, day: String
+    ) : Schedule {
+        return Schedule(
+            id, name, phone, startTime, endTime, day
+        )
+    }
+
+    fun updateSchedule(id: Int, name: String, phone: String, startTime: String, endTime: String, day: String) {
+        val updatedSchedule = getUpdatedScheduleEntry(id, name, phone, startTime, endTime, day)
+        updateSchedule(updatedSchedule)
+    }
 }
 
 class ScheduleViewModelFactory(private val scheduleDao:ScheduleDao) : ViewModelProvider.Factory {

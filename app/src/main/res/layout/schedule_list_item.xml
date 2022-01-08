@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/name"
         style="@style/Widget.Schedule.ListItemTextView"
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_marginStart="@dimen/margin_between_elements"
         android:fontFamily="sans-serif"
         app:layout_constraintHorizontal_weight="1"
