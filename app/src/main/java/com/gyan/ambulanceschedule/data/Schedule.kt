@@ -19,3 +19,7 @@ data class Schedule (
     @ColumnInfo(name="day")
     val day: String,
 )
+
+fun Schedule.getFormattedSchedule() : String {
+    return "${day.replaceFirstChar { it.uppercase() }}, $startTime - $endTime"
+}

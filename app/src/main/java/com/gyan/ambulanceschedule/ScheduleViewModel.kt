@@ -1,8 +1,6 @@
 package com.gyan.ambulanceschedule
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.gyan.ambulanceschedule.data.Schedule
 import com.gyan.ambulanceschedule.data.ScheduleDao
 import kotlinx.coroutines.launch
@@ -10,6 +8,8 @@ import kotlinx.coroutines.launch
 class ScheduleViewModel(private val scheduleDao: ScheduleDao) : ViewModel() {
 
     val listOfDays = listOf<String>("sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday")
+
+    val allSchedules : LiveData<List<Schedule>> = scheduleDao.getSchedules().asLiveData()
 
     private fun insertSchedule(schedule: Schedule){
         viewModelScope.launch {
