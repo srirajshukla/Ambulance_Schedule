@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.gyan.ambulanceschedule.data.Schedule
+import com.gyan.ambulanceschedule.data.getFormattedSchedule
 import com.gyan.ambulanceschedule.databinding.FragmentScheduleDetailBinding
 
 
@@ -23,6 +26,14 @@ class ScheduleDetailFragment : Fragment() {
     private var _binding : FragmentScheduleDetailBinding? = null
     private val binding get() = _binding!!
 
+    lateinit var schedule: Schedule
+
+    private val viewModel : ScheduleViewModel by activityViewModels {
+        ScheduleViewModelFactory(
+            (activity?.application as ScheduleApplication).database.scheduleDao()
+        )
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +43,17 @@ class ScheduleDetailFragment : Fragment() {
         _binding = FragmentScheduleDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val id = navigationArgs.scheduleId
+        viewModel.retrieveSchedule(id).observe(this.viewLifecycleOwner){ selectedSchedule ->
+            schedule = selectedSchedule
+            bind(schedule)
+        }
+    }
+
     /**
      * Displays an alert dialog to get the user's confirmation before deleting the item.
      */
@@ -60,6 +82,14 @@ class ScheduleDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun bind(schedule: Schedule){
+        binding.apply {
+            name.text = schedule.name
+            phone.text = schedule.phone
+            scheduleTime.text = schedule.getFormattedSchedule()
+        }
     }
 
 }

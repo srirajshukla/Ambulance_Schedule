@@ -40,6 +40,8 @@ class ScheduleListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = ScheduleListAdapter{
+            val action = ScheduleListFragmentDirections.actionScheduleListFragmentToScheduleDetailFragment(it.id)
+            this.findNavController().navigate(action)
         }
         binding.recyclerView.adapter = adapter
 

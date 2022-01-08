@@ -41,6 +41,10 @@ class ScheduleViewModel(private val scheduleDao: ScheduleDao) : ViewModel() {
             return false
         return true
     }
+
+    fun retrieveSchedule(id: Int) : LiveData<Schedule> {
+        return scheduleDao.getSchedule(id).asLiveData()
+    }
 }
 
 class ScheduleViewModelFactory(private val scheduleDao:ScheduleDao) : ViewModelProvider.Factory {
